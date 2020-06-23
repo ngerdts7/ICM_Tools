@@ -52,4 +52,7 @@ WEND;
 UPDATE Subcatchment SET user_number_5 = node.user_number_5;
 
 SELECT FROM Subcatchment WHERE user_number_5 > 0;
-SELECT SELECTED subcatchment_id, sim.max_qcatch, user_number_5 FROM Subcatchment 
+SELECT SELECTED subcatchment_id AS [Subcatchment], 
+    sim.max_qcatch AS [Peak Flow],
+    user_number_5 AS [Travel Time (minutes)]
+    FROM Subcatchment 
