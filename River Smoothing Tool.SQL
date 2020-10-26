@@ -2,7 +2,7 @@
 LET $min_slope = 0.0005;
 LET $max_slope = 0.05;
 PROMPT TITLE "River Reach Slope Enforcement";
-PROMPT LINE $min_slope "Minimum allowed slope" DP 3;
+PROMPT LINE $min_slope "Minimum allowed slope" DP 5;
 PROMPT LINE $max_slope "Maximum allowed slope" DP 3;
 PROMPT DISPLAY;
 
