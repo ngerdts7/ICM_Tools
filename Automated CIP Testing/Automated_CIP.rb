@@ -1,16 +1,15 @@
 t=Time.now
 database='snumbat://localhost:40000/Demo'
-netid=9917
-runid=10174
-simid=10175
+netid=10179
+runid=10180
+simid=10181
 
-iteration_limit = 10	# Maximum number of iterations to modify and rerun model
+iteration_limit = 100	# Maximum number of iterations to modify and rerun model
 timeout = 60*1000		# simulation timeout time in miliseconds if runs take too long. Currently 60 sec
 report_validation = false
 
 db=WSApplication.open database,false
 network=db.model_object_from_type_and_id 'Model Network',netid
-simobject=db.model_object_from_type_and_id 'Sim',simid
 runobject=db.model_object_from_type_and_id 'Run',runid
 WSApplication.connect_local_agent(1)
 sims=Array.new
@@ -18,9 +17,10 @@ runobject.children.each do |c|
 	sims<<c
 end
 
-
 k = 0
 while k < iteration_limit
+	puts "Starting loop ##{k} out of max #{iteration_limit}"
+	simobject=db.model_object_from_type_and_id 'Sim',simid
 	net=network.open
 	sim=simobject.open
 
