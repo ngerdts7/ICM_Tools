@@ -10,7 +10,6 @@ report_validation = false
 
 db=WSApplication.open database,false
 network=db.model_object_from_type_and_id 'Model Network',netid
-simobject=db.model_object_from_type_and_id 'Sim',simid
 runobject=db.model_object_from_type_and_id 'Run',runid
 WSApplication.connect_local_agent(1)
 sims=Array.new
@@ -18,9 +17,10 @@ runobject.children.each do |c|
 	sims<<c
 end
 
-
 k = 0
 while k < iteration_limit
+	puts "Starting loop ##{k} out of max #{iteration_limit}"
+	simobject=db.model_object_from_type_and_id 'Sim',simid
 	net=network.open
 	sim=simobject.open
 
