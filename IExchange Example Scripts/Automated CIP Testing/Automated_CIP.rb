@@ -1,10 +1,10 @@
 t=Time.now
 database='snumbat://localhost:40000/Demo'
-netid=9917
-runid=10174
-simid=10175
+netid=10179
+runid=10180
+simid=10181
 
-iteration_limit = 10	# Maximum number of iterations to modify and rerun model
+iteration_limit = 100	# Maximum number of iterations to modify and rerun model
 timeout = 60*1000		# simulation timeout time in miliseconds if runs take too long. Currently 60 sec
 report_validation = false
 
