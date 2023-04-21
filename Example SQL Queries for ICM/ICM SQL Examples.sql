@@ -452,10 +452,10 @@ INTEGRAL(IIF((tsr.timestep_no > $left) AND (tsr.timestep_no < $right),tsr.ds_flo
 /* ------------------------------------------------
 Query:			Route Subcatchments to lowest node within X Distance
 Object Type:	All Nodes
-Description:	Query to assign Subcatchment drainage to the lowest elevation node within 500 feet of the centroid.
+Description:	Query to assign Subcatchment drainage to the lowest elevation node within 500 feet of the centroid, that also matches the specified system type ("foul" in this example).
 Adjust the distance as needed.
 Script reassigns subcatchments with node_id missing or equal to zero.
-
+Note: You may want to start with a low distance first to fill in using closest nodes first then raise the distance with additional iterations.
 Search Type = 	Distance
 Distance = 		500
 Layer Type = 	Network Layer
@@ -471,7 +471,7 @@ SELECT DISTINCT subcatchment_id INTO $subs FROM [Subcatchment]
 LET $i = 1;
 WHILE $i <= LEN($subs);
 	CLEAR SELECTION;
-	SELECT WHERE spatial.subcatchment_id  = AREF($i,$subs) AND node_type <> 'Outfall';
+	SELECT WHERE spatial.subcatchment_id  = AREF($i,$subs) AND node_type <> 'Outfall' AND system_type = 'foul';
 	SELECT SELECTED MIN(chamber_floor) INTO $low_invert;
 	SELECT SELECTED node_id INTO $drain_node WHERE chamber_floor = $low_invert;
 	NVL($drain_node,'0');
